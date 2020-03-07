@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>成长手册</title>
+    </head>
+
+    <style>
+        #whereErrorFrom{
+            padding: 10px;
+        }
+
+        .studentInformation{
+            padding: 10px;
+        }
+
+        .mian{
+            page-break-after:always
+        }
+
+        .num {
+            color: #ff9565;
+            font-size: medium;
+            background-color: white;
+        }
+
+        .top {
+            color: black;
+            font-size: large;
+        }
+
+        .errorInformation {
+            background: darkgray;
+        }
+
+        body {
+            padding: 5px;
+        }
+    </style>
+    <body>
+        <div>
+            <div class = "mian">
+                <div class="top" align="center">
+                    <img src="img/bookmark-2.svg" width="24px" height="24px" align="center"><strong>错题本</strong><br>
+                </div>
+
+                <div class = "studentInformation">
+                    <span>姓名：{{model.name}}</span><br>
+                    <span>考试名称：{{model.examName}}</span><br>
+                    <span>考试科目：{{model.subjectName}}</span><br>
+                    <span>班级排名：{{model.rank}}</span><br>
+                    <div>
+                        <hr style= "border:1px dashed gray">
+                    </div>
+                </div>
+
+                <div class="graphy">
+                    <div>
+                        <img src="img/ic_trending_up_48px.svg" width="24px" height="24px" align="center"><span
+                            style="padding: 3px,5px,3px,5px;">成绩变化</span>
+                            <img src="zhixuewang/templates/img/gradechange.svg"  width = "700px" height="400px" align="top"/>
+                    </div>
+                    <div>
+                        <img src="img/check-circle-07.svg" width="24px" height="24px" align="center">
+                        <span style="padding: 3px,5px,3px,5px;">优劣势分析</span>
+                        <img src="zhixuewang/templates/img/losttopic.svg" width = "700px" height="400px" align="top"/>
+                    </div>
+                    <div>
+                        <hr style= "border:1px dashed gray">
+                    </div>
+                </div>
+            </div>
+
+            <div class = "mian">
+                <div class="top" align="center">
+                    <img src="img/bookmark-2.svg" width="24px" height="24px" align="center"><strong>全部错题</strong><br>
+                </div>
+                {% for errorbook in model.errorbooks %}
+                <div class="errorInformation">
+                    <span class="num">{{loop.index}}.</span>
+                    <span  id = "whereErrorFrom">错题来源:{{model.examName}};</span>
+                    <span >班级正确率:{{errorbook["ClassScoreRate"]}}</span>
+                </div>
+                     {{errorbook["Content"]}}
+                     <div style="height: 270px;">
+                         【错题订正】:
+                     </div>
+                <div>
+                    <hr style= "border:1px dashed gray">
+                </div>
+                {% endfor %}
+            </div>
+                
+            <div>
+                <div class="top" align="center">
+                    <img src="img/bookmark-2.svg" width="24px" height="24px" align="center"><strong>参考答案</strong><br>
+                </div>
+                {% for errorbook in model.errorbooks %}
+                    <span class="num">{{loop.index}}.</span>
+                    <span>答案：{{errorbook["Answer"]}}</span><br>
+                    <span>分析：{{errorbook["Analysis"]}}</span><br>
+                    <div>
+                        <hr style= "border:1px dashed gray">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </body>
+</html>
